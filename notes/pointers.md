@@ -52,3 +52,78 @@ delete me;
 
 在声明的时候，使用形如 `int array[10] {0};` 进行定义的数组使用的是静态联编，在编译的时候就分配了内存。而使用 `int *array = new int [10]`，是在运行过程中动态进行内存分配和回收的，因此必须加上 `delete` 释放内存。
 
+## 指针常量和常量指针
+
+### 指针常量——指针类型的常量
+
+```cpp
+int *const a;
+```
+
+代表的是变量 `a` 是一个常量，`a` 的类型是一个 `int指针`。也就是说 `a` 的值（它指向的地址）是不可以进行更改的，但是该地址存储的值是可以更改的。
+
+```cpp
+int *const a;
+int *b = new int;
+*a = 10; //合法
+a = b; //非法
+```
+
+### 常量指针——指向常量的指针
+
+```cpp
+const int *a; 
+int const *a;
+```
+
+常量指针说的是，该指针变量指向的是一个常量。也就是说，指针所指向的地址是可以改变的，但是地址中的值是常量不可改变。常用于函数参数传递，尤其是数组。
+
+```cpp
+int sum_arr(const int *begin, const int *end);
+int sum_arr(const int *begin, const int *end) {
+    const int *ptr;
+    int sum=0;
+    
+    for (ptr=begin; ptr!=end; ptr++){
+        sum += *ptr;
+    }
+
+    return sum;
+}
+
+int cookies[5] = {1, 2, 3, 4, 5};
+int all_cookies = sum_arr(cookies, cookies+5);
+```
+在上述代码中，传入的函数中的值是不可更改的常量。也即对 `*ptr` 进行赋值是非法的。  
+
+代码中，声明 `ptr` 的时候的 `const` 关键字是必须的，因为在定义函数的时候，用的是 `const int *begin`，必须对应。否则在 `ptr=begin` 的赋值操作会报错。
+
+总结：  
+事实上，可以将普通变量的地址给到 const 指针，只不过此时，对于该指针而言，它指向的地址中的值是不可更改的。也可以将 const 变量的地址给 const 指针。  
+但是，将 const 变量的地址给普通指针是不可行的，在编译的时候会报错，比如下面的例子：
+```cpp 
+const int a = 0;
+int *ptr = &a; // 非法
+```
+
+### 二维数组传参
+
+```cpp 
+int data[3][4] = {
+    {1, 2, 3, 4}, 
+    {2, 3, 4, 5}, 
+    {3, 4, 5, 6}
+};
+
+// 正确的函数原型
+int sum(int arr[][4], int size);
+int sum(int (*arr)[4], int size);
+// data的本质是 3个[(指向4个int组成的数组)的指针]的数组
+
+// 另一种声明二维数组的方式，数组的指针
+char *a[5] = {
+    "abc", "aeg", "aeg"
+}；
+
+int sum(char **arr, int size);
+```

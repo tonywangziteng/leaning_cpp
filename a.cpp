@@ -8,6 +8,8 @@ struct person
     std::string name{"Haymax"};
     int age=18;
 };
+int sum_arr(int *begin, int *end);
+int sum(int (*arr)[4], int size);
 
 int main()
 {
@@ -19,23 +21,40 @@ int main()
     int my_array[10];
     std::cout << my_array << std::endl;
 
-    char a[10] = {"Hay"};
-    std::string b = {"Haymax"};
-    char c[10] = "Hay";
+    const int n_arr = 5;
+    int cookies[n_arr] = {1, 2, 3, 4, 5};
+    std::cout << sum_arr(cookies, cookies+n_arr) << std::endl; 
 
-    std::cout << (a==c) << std::endl;
-    std::cout << *a << std::endl;
-
-    const char* cities[3] = {
-        "aiejga", 
-        "oiaweg", 
-        "aieoha"
+    int data[3][4] = {
+        {1, 2, 3, 4}, 
+        {2, 3, 4, 5}, 
+        {3, 4, 5, 6}
     };
-    char* city = new char [10];
-    city = "aweg";
-    std::cout << city <<std::endl;
-    for (int i; i<3; i++){
-        std::cout << cities[i] << std::endl;
-    }
-    return 0;
+    std::cout << sum(data, 3) << std::endl;
 }
+
+int sum_arr(int *begin, int *end) {
+    int *ptr;
+    int sum=0;
+    
+    for (ptr=begin; ptr!=end; ptr++){
+        sum += *ptr;
+    }
+
+    return sum;
+}
+
+int sum(int (*arr)[4], int size){
+    int total = 0;
+    for (int i=0; i<size; i++){
+        for (int j=0; j<4; j++){
+            total += arr[i][j];
+        }
+    }
+    return total;
+}
+
+
+
+
+
