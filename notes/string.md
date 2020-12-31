@@ -21,6 +21,7 @@ char my_string[] {"init string"};
 - `strcat(str1, str2)`，把str2的值拼接到str1之后
 
 ！不能将一个C风格的字符串赋值给另一个  
+！利用字符数组定义的时候必须使用 `const` 关键字，因为正常 `char*` 存储在栈区，而字符串常量在常量区。正确声明方法 `const char* myStr = "Hello world"`
 
 
 ## String类
