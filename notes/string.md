@@ -15,7 +15,7 @@ char my_string[] {"init string"};
 
 ### 相关操作 
 
-在 `cstring` 这个头文件中，
+在 `cstring` 这个头文件中，事实上每个函数都是接受的 **字符串的首地址**
 - `strlen(str)` ，返回的是字符串的长度。  
 - `strcpy(str1, str2)`，把str2的值复制到str1
 - `strcat(str1, str2)`，把str2的值拼接到str1之后

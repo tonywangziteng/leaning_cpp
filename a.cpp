@@ -15,5 +15,9 @@ int main()
     char hello_string[50] = "hello world";
     std::cout << candidate0.name << std::endl;
     std::cout << strlen(hello_string) << std::endl;
+
+    int my_array[10];
+    std::cout << my_array << std::endl;
+
     return 0;
 }
