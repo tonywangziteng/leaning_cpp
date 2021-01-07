@@ -3,58 +3,46 @@
 #include<string>
 #include<cstring>
 
-struct person
-{
-    std::string name{"Haymax"};
-    int age=18;
+struct job{
+    std::string name;
+    int salary;
 };
-int sum_arr(int *begin, int *end);
-int sum(int (*arr)[4], int size);
 
-int main()
-{
-    person candidate0;
-    char hello_string[50] = "hello world";
-    std::cout << candidate0.name << std::endl;
-    std::cout << strlen(hello_string) << std::endl;
+template <typename T>
+void Swap(T &, T &);
 
-    int my_array[10];
-    std::cout << my_array << std::endl;
+template<> void Swap<job>(job &, job &);
 
-    const int n_arr = 5;
-    int cookies[n_arr] = {1, 2, 3, 4, 5};
-    std::cout << sum_arr(cookies, cookies+n_arr) << std::endl; 
+// void Swap(job &, job &);
 
-    int data[3][4] = {
-        {1, 2, 3, 4}, 
-        {2, 3, 4, 5}, 
-        {3, 4, 5, 6}
-    };
-    std::cout << sum(data, 3) << std::endl;
+int main(){
+    job good_job = {"mechmind", 250};
+    job bad_job = {"ByteDance", 400};
+
+    Swap(good_job, bad_job);
+    std::cout << good_job.name << std::endl;
+    std::cout << good_job.salary;
 }
 
-int sum_arr(int *begin, int *end) {
-    int *ptr;
-    int sum=0;
-    
-    for (ptr=begin; ptr!=end; ptr++){
-        sum += *ptr;
-    }
-
-    return sum;
+template <typename T>
+void Swap(T &a, T &b){
+    T temp;
+    temp = a;
+    a = b;
+    b = temp;
 }
+/*
+void Swap(job &a, job &b){
+    int temp;
+    temp = a.salary;
+    a.salary = b.salary;
+    b.salary = temp;
+}*/
 
-int sum(int (*arr)[4], int size){
-    int total = 0;
-    for (int i=0; i<size; i++){
-        for (int j=0; j<4; j++){
-            total += arr[i][j];
-        }
-    }
-    return total;
+template<> void Swap<job>(job &a, job &b){
+    std::string temp;
+    temp = a.name;
+    a.name = b.name;
+    b.name = temp;
 }
-
-
-
-
 
