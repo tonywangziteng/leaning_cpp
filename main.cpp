@@ -1,7 +1,9 @@
-#include<iostream>
-#include<cfloat>
-#include<string>
-#include<cstring>
+#include <iostream>
+#include <cfloat>
+#include <string>
+#include <cstring>
+
+#include "heads/stock.h"
 
 
 struct Node{
@@ -24,10 +26,9 @@ struct Node{
 };
 
 int main(){
-
-    Node a;
-    Node *b = new Node;
-    Node c(5, b);
+    Stock tony;
+    tony.buy(10, 100);
+    tony.show();
     return 0;
 }
 
