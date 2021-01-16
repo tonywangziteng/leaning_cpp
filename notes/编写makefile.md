@@ -31,7 +31,7 @@ patsubst：
 ```makefile
 obj = main.o stock.o  
 target = app  
-CC = gcc  
+CC = g++  
 
 $(target): $(obj)  
     $(CC) $(obj) -o $(target)  
